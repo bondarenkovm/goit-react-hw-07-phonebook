@@ -1,6 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getFilterValue } from 'redux/selectors';
-import { deleteContact } from 'redux/contactsSlice';
+import {
+  getContacts,
+  getFilterValue,
+  getLoading,
+  getError,
+} from 'redux/selectors';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
+// import { deleteContact } from 'redux/contactsSlice';
 
 // import PropTypes from 'prop-types';
 import { List, Item, Button } from './ContactList.styled';
@@ -8,30 +15,40 @@ import { List, Item, Button } from './ContactList.styled';
 const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilterValue);
+  const isLoading = useSelector(getLoading);
+  const error = useSelector(getError);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   const filteredContacts = contacts.filter(({ name }) =>
     name.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const delContact = id => {
-    dispatch(deleteContact(id));
-  };
+  // const delContact = id => {
+  //   dispatch(deleteContact(id));
+  // };
 
   return (
-    <List>
-      {filteredContacts.map(({ id, name, number }) => {
-        return (
-          <Item key={id}>
-            <span>{name}:</span>
-            <span>{number}</span>
-            <Button type="button" onClick={() => delContact(id)}>
-              Delete
-            </Button>
-          </Item>
-        );
-      })}
-    </List>
+    <>
+      {isLoading && !error && <div>Loading...</div>}
+      <List>
+        {filteredContacts.map(({ id, name, number }) => {
+          return (
+            <Item key={id}>
+              <span>{name}:</span>
+              <span>{number}</span>
+              <Button type="button">
+                {/* <Button type="button" onClick={() => delContact(id)}> */}
+                Delete
+              </Button>
+            </Item>
+          );
+        })}
+      </List>
+    </>
   );
 };
 

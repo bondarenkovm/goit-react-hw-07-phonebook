@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+// import { addContact } from 'redux/contactsSlice';
 import { getContacts } from 'redux/selectors';
 // import PropTypes from 'prop-types';
 import { Formik, Field } from 'formik';
@@ -43,7 +43,7 @@ const ContactForm = () => {
       resetForm();
       return;
     }
-    dispatch(addContact(values));
+    // dispatch(addContact(values));
     resetForm();
   };
 
