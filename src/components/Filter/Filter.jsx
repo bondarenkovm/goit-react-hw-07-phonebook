@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setFilterValue } from 'redux/filtersSlice';
 import { getFilterValue } from 'redux/selectors';
 
-// import PropTypes from 'prop-types';
 import { Label } from './Filter.stuled';
 
 const Filter = () => {
@@ -21,7 +20,3 @@ const Filter = () => {
 };
 
 export { Filter };
-
-// Filter.propTypes = {
-//   value: PropTypes.string,
-// };

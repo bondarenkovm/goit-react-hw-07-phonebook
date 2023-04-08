@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 import { fetchContacts } from 'redux/operations';
 // import { deleteContact } from 'redux/contactsSlice';
 
-// import PropTypes from 'prop-types';
 import { List, Item, Button } from './ContactList.styled';
 
 const ContactList = () => {
@@ -53,13 +52,3 @@ const ContactList = () => {
 };
 
 export { ContactList };
-
-// ContactList.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ).isRequired,
-// };
