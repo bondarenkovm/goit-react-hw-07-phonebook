@@ -6,10 +6,10 @@ import {
   getError,
 } from 'redux/selectors';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
-// import { deleteContact } from 'redux/contactsSlice';
+import { fetchContacts, deleteContact } from 'redux/operations';
 
 import { List, Item, Button } from './ContactList.styled';
+import { ThreeDots } from 'react-loader-spinner';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
@@ -26,21 +26,32 @@ const ContactList = () => {
     name.toLowerCase().includes(filter.toLowerCase())
   );
 
-  // const delContact = id => {
-  //   dispatch(deleteContact(id));
-  // };
+  const delContact = id => {
+    dispatch(deleteContact(id));
+  };
 
   return (
     <>
-      {isLoading && !error && <div>Loading...</div>}
+      {isLoading && !error && (
+        <ThreeDots
+          height="40"
+          width="40"
+          radius="9"
+          color="#4fa94d"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClassName=""
+          visible={true}
+        />
+      )}
+      {/* {isLoading && !error && <div>Loading...</div>} */}
       <List>
         {filteredContacts.map(({ id, name, number }) => {
           return (
             <Item key={id}>
               <span>{name}:</span>
               <span>{number}</span>
-              <Button type="button">
-                {/* <Button type="button" onClick={() => delContact(id)}> */}
+              <Button type="button" onClick={() => delContact(id)}>
                 Delete
               </Button>
             </Item>
