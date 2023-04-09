@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  getContacts,
-  getFilterValue,
-  getLoading,
-  getError,
+  selectFilteredContact,
+  // getContacts,
+  // getFilterValue,
+  selectLoading,
+  selectError,
 } from 'redux/selectors';
 import { useEffect } from 'react';
 import { fetchContacts, deleteContact } from 'redux/operations';
@@ -12,19 +13,20 @@ import { List, Item, Button } from './ContactList.styled';
 import { ThreeDots } from 'react-loader-spinner';
 
 const ContactList = () => {
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilterValue);
-  const isLoading = useSelector(getLoading);
-  const error = useSelector(getError);
+  const filteredContacts = useSelector(selectFilteredContact);
+  // const contacts = useSelector(getContacts);
+  // const filter = useSelector(getFilterValue);
+  const isLoading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const filteredContacts = contacts.filter(({ name }) =>
-    name.toLowerCase().includes(filter.toLowerCase())
-  );
+  // const filteredContacts = contacts.filter(({ name }) =>
+  //   name.toLowerCase().includes(filter.toLowerCase())
+  // );
 
   const delContact = id => {
     dispatch(deleteContact(id));

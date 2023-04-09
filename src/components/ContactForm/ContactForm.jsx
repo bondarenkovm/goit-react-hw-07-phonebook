@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'redux/operations';
-import { getContacts } from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { Formik, Field } from 'formik';
 import * as Yup from 'yup';
 import { Label, Button, Form, ErrorMessage } from './ContactForm.styled';
@@ -29,7 +29,7 @@ const FormSchema = Yup.object().shape({
 
 const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = (values, { resetForm }) => {
     if (contacts.some(({ name }) => name === values.name)) {
